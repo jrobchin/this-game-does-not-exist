@@ -1,6 +1,8 @@
 data/steam/
 data/steam_header_images/
 
+data/models/
+
 *.swp
 
 # Byte-compiled / optimized / DLL files
