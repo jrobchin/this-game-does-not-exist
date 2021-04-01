@@ -8,5 +8,5 @@ python run_clm.py \
 --num_train_epochs 5 \
 --fp16 \
 --output_dir "../data/models/gpt2-game/" \
---per_gpu_train_batch_size 1
+--per_device_train_batch_size 1
 
