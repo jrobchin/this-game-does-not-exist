@@ -2,7 +2,9 @@ data/steam/
 data/images/
 data/models/
 
-data/models/
+data/screenshots
+data/images.tar.gz
+data/screenshots.tar.gz
 
 *.swp
 
