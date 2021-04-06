@@ -2,9 +2,13 @@ data/steam/
 data/images/
 data/models/
 
+<<<<<<< HEAD
 data/screenshots
 data/images.tar.gz
 data/screenshots.tar.gz
+=======
+data/models/
+>>>>>>> 83b21f8ce536d7c2c2f3c14092bf92e52814e8d0
 
 *.swp
 
