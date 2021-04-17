@@ -2,10 +2,12 @@ data/steam/
 data/images/
 data/models/
 
-data/screenshots
+data/screenshots/
 data/images.tar.gz
 data/screenshots.tar.gz
 data/models/
+
+docker/data/
 
 *.swp
 
