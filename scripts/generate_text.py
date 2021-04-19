@@ -33,7 +33,7 @@ def main():
     logging.info(f"Documents in database: {coll.count_documents(filter={})}")
 
     # Load all models
-    tokenizer, text_model = load_tokenizer_and_model(args.text_model_dir, device="cuda")
+    tokenizer, text_model = load_tokenizer_and_model(args.text_model_dir)
     logging.info("Loaded tokenizer and model")
 
     # Generate games and insert into database

@@ -7,6 +7,16 @@ import logging
 
 import pandas as pd
 from transformers import GPT2LMHeadModel, GPT2TokenizerFast
+import torch
+from torch import nn
+import numpy as np
+from PIL import Image
+
+from scripts.models import HeaderGenerator, ScreenshotGenerator
+
+
+torch_device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 
 @dataclass
 class Game:
@@ -31,7 +41,7 @@ class TOKENS(Enum):
     ENDOFTEXT = "<|endoftext|>"
 
 
-def load_tokenizer_and_model(model_path: str, device, eval=True) -> Tuple[GPT2TokenizerFast, GPT2LMHeadModel]:
+def load_tokenizer_and_model(model_path: str, device = torch_device, eval=True) -> Tuple[GPT2TokenizerFast, GPT2LMHeadModel]:
     tokenizer = GPT2TokenizerFast.from_pretrained(model_path)
     model = GPT2LMHeadModel.from_pretrained(model_path, pad_token_id=tokenizer.eos_token_id)
     model.to(device)
@@ -90,3 +100,21 @@ def generate_game_text(tokenizer: GPT2TokenizerFast, model: GPT2LMHeadModel, dat
         header_img=None,
         screenshot_img=None
     )
+
+
+def arr_to_image(data: np.ndarray):
+    return Image.fromarray((255.0 / data.max() * (data - data.min())).astype(np.uint8))
+
+
+def generate_header(gen_model: HeaderGenerator, device = torch_device) -> Image:
+    noise = torch.randn(1, HeaderGenerator.LATENT_VECTOR_SIZE, 1, 1, device=device)
+    generated_header = gen_model(noise).detach().cpu().numpy()[0]
+    generated_header = np.transpose(generated_header, (1, 2, 0))
+    return arr_to_image(generated_header)
+
+
+def generate_screenshot(gen_model: ScreenshotGenerator, device = torch_device) -> None:
+    noise = torch.randn(1, ScreenshotGenerator.LATENT_VECTOR_SIZE, 1, 1, device=device)
+    generate_screenshot = gen_model(noise).detach().cpu().numpy()[0]
+    generate_screenshot = np.transpose(generate_screenshot, (1, 2, 0))
+    return arr_to_image(generate_screenshot)
