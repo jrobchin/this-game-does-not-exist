@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/home/jason/miniconda3/envs/tgdne/bin/python"
+    "python.pythonPath": "/home/jason/miniconda3/envs/tgdne/bin/python",
+    "editor.formatOnSave": true
 }
