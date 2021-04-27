@@ -13,13 +13,13 @@ const GamePage: FC<{ gameData: Game }> = ({ gameData }) => {
         width="460"
         height="215"
       />
-      {gameData.screenshot_img.map((img) => {
-        console.log(img);
+      {gameData.screenshot_img.map((img, index) => {
         return (
           <Image
             src={`/images/screenshots/${img}.jpg`}
             width="255"
             height="169"
+            key={index}
           />
         );
       })}
