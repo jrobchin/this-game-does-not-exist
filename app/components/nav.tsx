@@ -11,10 +11,15 @@ import {
   Divider,
   useDisclosure,
   Collapse,
+  LinkProps,
 } from "@chakra-ui/react";
 import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 
-const NavLink: FC<{ to?: string }> = ({ children, to = "/", ...props }) => (
+const NavLink: FC<{ to?: string } & LinkProps> = ({
+  children,
+  to = "/",
+  ...props
+}) => (
   <Link href={to} fontWeight={600} marginY={5} paddingX={5} {...props}>
     {children}
   </Link>
@@ -36,7 +41,7 @@ const MobileNav: FC = () => {
   return (
     <Box display={{ base: "block", md: "none" }}>
       <Flex padding={5} alignItems="center">
-        <Link href="/" fontSize="md" fontWeight={600}>
+        <Link href="/" fontSize="md" fontWeight={600} color="gray.600">
           THIS GAME DOES NOT EXIST
         </Link>
         <Spacer />
@@ -45,12 +50,18 @@ const MobileNav: FC = () => {
 
       <Collapse in={isOpen} animateOpacity>
         <VStack marginBottom={5}>
-          <Link>VIEW ALL GAMES</Link>
+          <Link fontWeight={600} color="gray.600">
+            VIEW ALL GAMES
+          </Link>
           <Box paddingY={2} w="100%">
             <Divider />
           </Box>
-          <Link>YouTube</Link>
-          <Link>Source Code</Link>
+          <Link fontWeight={600} color="red.500">
+            YouTube
+          </Link>
+          <Link fontWeight={600} color="gray.600">
+            Source Code
+          </Link>
         </VStack>
       </Collapse>
     </Box>
@@ -60,22 +71,29 @@ const MobileNav: FC = () => {
 const DesktopNav: FC = () => (
   <Flex display={{ base: "none", md: "flex" }}>
     <HStack>
-      <NavLink>THIS GAME DOES NOT EXIST</NavLink>
-      <NavLink to="/games">VIEW ALL GAMES</NavLink>
+      <NavLink color="gray.600">THIS GAME DOES NOT EXIST</NavLink>
+      <NavLink to="/games" color="gray.600">
+        VIEW ALL GAMES
+      </NavLink>
     </HStack>
     <Spacer />
     <HStack>
-      <NavLink to="https://www.youtube.com/channel/UCtt7TyXKcSN7_gchU4lEyRQ">
+      <NavLink
+        to="https://www.youtube.com/channel/UCtt7TyXKcSN7_gchU4lEyRQ"
+        color="red.500"
+      >
         YouTube
       </NavLink>
-      <NavLink to="https://github.com/jrobchin/tgdne">Code</NavLink>
+      <NavLink to="https://github.com/jrobchin/tgdne" color="gray.600">
+        Code
+      </NavLink>
     </HStack>
   </Flex>
 );
 
 const Nav: FC = () => {
   return (
-    <Container maxW="6xl">
+    <Container maxW="4xl">
       <DesktopNav />
       <MobileNav />
     </Container>
