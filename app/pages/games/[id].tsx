@@ -3,10 +3,25 @@ import Image from "next/image";
 import { FC } from "react";
 import { Game } from "../../types";
 import { getAllGames, getGame } from "../../util/games";
+import { Container } from "@chakra-ui/react";
+
+const logGameDataOnBrowser = (gameData: Game) => {
+  if (typeof window !== "undefined") {
+    console.log(
+      "Hey, if you're interested in what the game data looks like, here it is :)"
+    );
+    console.log(
+      "If you're into software development and data science, you should check out my YouTube channel: https://www.youtube.com/channel/UCtt7TyXKcSN7_gchU4lEyRQ"
+    );
+    console.log(gameData);
+  }
+};
 
 const GamePage: FC<{ gameData: Game }> = ({ gameData }) => {
+  logGameDataOnBrowser(gameData);
+
   return (
-    <div>
+    <Container maxW="4xl">
       <p>{JSON.stringify(gameData)}</p>
       <Image
         src={`/images/headers/${gameData.header_img}.jpg`}
@@ -23,7 +38,7 @@ const GamePage: FC<{ gameData: Game }> = ({ gameData }) => {
           />
         );
       })}
-    </div>
+    </Container>
   );
 };
 
