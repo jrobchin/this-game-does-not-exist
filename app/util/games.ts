@@ -1,4 +1,3 @@
-import { valueScaleCorrection } from "framer-motion/types/render/dom/projection/scale-correction";
 import fs from "fs";
 import path from "path";
 
