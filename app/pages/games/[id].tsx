@@ -1,9 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Game } from "../../types";
 import { getAllGames, getGame } from "../../util/games";
-import { Box, Container, Flex, Heading } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import GamePageNav from "../../components/games/page-nav";
 import GameBreadcrumb from "../../components/games/breadcrumb";
 import Head from "next/head";
@@ -20,15 +20,29 @@ const logGameDataOnBrowser = (gameData: Game) => {
   }
 };
 
+const GameImages: FC<{ gameData: Game }> = ({ gameData }) => (
+  <Flex direction={{ base: "column-reverse", md: "row" }} minH="215px">
+    <Box position="relative" w="60%">
+      <Image
+        src={`/images/headers/${gameData.header_img}.jpg`}
+        layout="fill"
+        objectFit="contain"
+      />
+    </Box>
+    <ScreenshotGallery screenshots={gameData.screenshot_img} flexGrow={1} />
+  </Flex>
+);
+
 type Props = {
   gameData: Game;
-  releaseDate: Date;
+  releaseDate: string;
   prevId: string | null;
   nextId: string | null;
 };
 
 const GamePage: FC<Props> = ({ gameData, releaseDate, prevId, nextId }) => {
   logGameDataOnBrowser(gameData);
+  console.log(releaseDate);
 
   return (
     <div>
@@ -41,19 +55,11 @@ const GamePage: FC<Props> = ({ gameData, releaseDate, prevId, nextId }) => {
 
         <Heading mb={3}>{gameData.name}</Heading>
 
-        <Flex direction={{ base: "column-reverse", md: "row" }} minH="215px">
-          <Box position="relative" w="60%">
-            <Image
-              src={`/images/headers/${gameData.header_img}.jpg`}
-              layout="fill"
-              objectFit="contain"
-            />
-          </Box>
-          <ScreenshotGallery
-            screenshots={gameData.screenshot_img}
-            flexGrow={1}
-          />
-        </Flex>
+        <GameImages gameData={gameData} />
+
+        <Box my={5} />
+
+        <Text>Release Date: {releaseDate}</Text>
 
         <p>{JSON.stringify(gameData)}</p>
 
@@ -78,11 +84,26 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 // https://stackoverflow.com/questions/9035627/elegant-method-to-generate-array-of-random-dates-within-two-dates
-function randomDate(start: Date, end: Date) {
+function randomDate(start: Date, end: Date): Date {
   return new Date(
     start.getTime() + Math.random() * (end.getTime() - start.getTime())
   );
 }
+
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const gameData = getGame(params?.id as string);
@@ -94,12 +115,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const nextId = gameIds[idIndex + 1] || null;
 
   // Generated data does not contain release data so we generate it here
-  const releaseDate = randomDate(new Date(2012, 0, 1), new Date());
+  const releaseDate = randomDate(new Date(1998, 0, 1), new Date());
+  const releaseDateString = `${releaseDate.getDate()} ${
+    MONTHS[releaseDate.getMonth()]
+  }, ${releaseDate.getFullYear()}`;
 
   return {
     props: {
       gameData,
-      releaseDate,
+      releaseDate: releaseDateString,
       prevId,
       nextId,
     },
