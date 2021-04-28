@@ -16,27 +16,36 @@ const NavLink: FC<LinkProps> = ({ children, ...props }) => (
   </Link>
 );
 
-const GamePageNav: FC<{ prevId: string; nextId: string } & CenterProps> = ({
-  prevId,
-  nextId,
-  ...props
-}) => (
+type Props = {
+  prevId: string | null;
+  nextId: string | null;
+} & CenterProps;
+
+const GamePageNav: FC<Props> = ({ prevId, nextId, ...props }) => (
   <Center {...props}>
     <Box
-      paddingY={3}
-      paddingX={10}
+      py={3}
+      px={10}
       w={{ base: "100%", md: "60%" }}
-      marginBottom={5}
+      mb={5}
       borderRadius="md"
     >
       <Flex spacing="30px">
-        <NavLink href={`/games/${prevId}`}>
-          <ChevronLeftIcon paddingBottom={1} /> Previous
-        </NavLink>
+        {prevId ? (
+          <NavLink href={`/games/${prevId}`}>
+            <ChevronLeftIcon paddingBottom={1} /> Previous
+          </NavLink>
+        ) : (
+          ""
+        )}
         <Spacer />
-        <NavLink href={`/games/${nextId}`}>
-          Next <ChevronRightIcon paddingBottom={1} />
-        </NavLink>
+        {nextId ? (
+          <NavLink href={`/games/${nextId}`}>
+            Next <ChevronRightIcon paddingBottom={1} />
+          </NavLink>
+        ) : (
+          ""
+        )}
       </Flex>
     </Box>
   </Center>
