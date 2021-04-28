@@ -4,20 +4,26 @@ import { FC } from "react";
 import { Game } from "../../types";
 import { getAllGames, getGame } from "../../util/games";
 import { Container } from "@chakra-ui/react";
+import GamePageNav from "./page-nav";
 
 const logGameDataOnBrowser = (gameData: Game) => {
   if (typeof window !== "undefined") {
     console.log(
-      "Hey, if you're interested in what the game data looks like, here it is :)"
-    );
-    console.log(
-      "If you're into software development and data science, you should check out my YouTube channel: https://www.youtube.com/channel/UCtt7TyXKcSN7_gchU4lEyRQ"
+      "Hey, if you're interested in what the game data looks like, here it is. " +
+        "\nIf you're into software development and data science, you should check out " +
+        "my YouTube channel:\nhttps://www.youtube.com/channel/UCtt7TyXKcSN7_gchU4lEyRQ"
     );
     console.log(gameData);
   }
 };
 
-const GamePage: FC<{ gameData: Game }> = ({ gameData }) => {
+type Props = {
+  gameData: Game;
+  prevId: string | null;
+  nextId: string | null;
+};
+
+const GamePage: FC<Props> = ({ gameData, prevId, nextId }) => {
   logGameDataOnBrowser(gameData);
 
   return (
@@ -38,6 +44,7 @@ const GamePage: FC<{ gameData: Game }> = ({ gameData }) => {
           />
         );
       })}
+      <GamePageNav marginY={5} prevId={prevId} nextId={nextId} />
     </Container>
   );
 };
@@ -58,9 +65,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const gameData = getGame(params?.id as string);
+
+  const games = getAllGames();
+  const gameIds: string[] = games.map((value) => value._id);
+  const idIndex: number = gameIds.indexOf(gameData._id);
+  const prevId = gameIds[idIndex - 1] || null;
+  const nextId = gameIds[idIndex + 1] || null;
+
   return {
     props: {
       gameData,
+      prevId,
+      nextId,
     },
   };
 };
