@@ -3,11 +3,20 @@ import Image from "next/image";
 import React, { FC } from "react";
 import { Game } from "../../types";
 import { getAllGames, getGame } from "../../util/games";
-import { Box, Container, Flex, Heading, Text, Spacer } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  Text,
+  Spacer,
+  HStack,
+} from "@chakra-ui/react";
 import GamePageNav from "../../components/games/page-nav";
 import GameBreadcrumb from "../../components/games/breadcrumb";
 import Head from "next/head";
 import ScreenshotGallery from "../../components/games/screenshot-gallery";
+import { linkSync } from "node:fs";
 
 const logGameDataOnBrowser = (gameData: Game) => {
   if (typeof window !== "undefined") {
@@ -34,6 +43,19 @@ const GameImages: FC<{ gameData: Game }> = ({ gameData }) => (
   </Flex>
 );
 
+function descriptionLines(description: string): string[] {
+  let lines: string[] = [];
+
+  // Split and new line on points and dashes
+  let points = description
+    .split(/[\-\*•] /i)
+    .map((val, index) => (index > 0 ? `- ${val}` : val));
+  lines.push(...points);
+
+  // letter-punctuation-letter should probably be a new line and point
+  return lines;
+}
+
 type Props = {
   gameData: Game;
   releaseDate: string;
@@ -57,21 +79,42 @@ const GamePage: FC<Props> = ({ gameData, releaseDate, prevId, nextId }) => {
 
         <GameImages gameData={gameData} />
 
-        <Box p={5} my={5} borderRadius="lg" shadow="lg" maxW="sm">
-          <Text>
-            <b>Release Date:</b> {releaseDate}
-          </Text>
-          <Text>
-            <b>Developer:</b> {gameData.developer}
-          </Text>
-          <Text>
-            <b>Publisher:</b> {gameData.publisher}
-          </Text>
-        </Box>
+        <Flex my={5} direction={{ base: "column", md: "row" }}>
+          <Box p={5} borderRadius="lg" shadow="lg" minW={{ base: 0, md: "sm" }}>
+            <Text>
+              <b>Release Date:</b> {releaseDate}
+            </Text>
+            <Text>
+              <b>Developer:</b> {gameData.developer}
+            </Text>
+            <Text>
+              <b>Publisher:</b> {gameData.publisher}
+            </Text>
+          </Box>
+
+          <Spacer minW="20px" />
+
+          <Box p={5} borderRadius="lg" shadow="lg" minW={{ base: 0, md: "sm" }}>
+            <Text>
+              <b>Genres:</b> {gameData.genres.join(", ")}
+            </Text>
+            <Text>
+              <b>Platforms:</b> {gameData.platforms.join(", ")}
+            </Text>
+            <Text>
+              <b>Categories:</b> {gameData.categories.join(", ")}
+            </Text>
+          </Box>
+        </Flex>
 
         <Box my={5} />
 
-        <p>{JSON.stringify(gameData)}</p>
+        <Box p={5} borderRadius="lg" shadow="lg">
+          <Heading size="md">About</Heading>
+          {descriptionLines(gameData.description).map((line) => (
+            <Text>{line}</Text>
+          ))}
+        </Box>
 
         <GamePageNav my={5} prevId={prevId} nextId={nextId} />
       </Container>
