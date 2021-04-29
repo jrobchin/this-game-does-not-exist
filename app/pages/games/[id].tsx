@@ -3,11 +3,12 @@ import Image from "next/image";
 import React, { FC } from "react";
 import { Game } from "../../types";
 import { getAllGames, getGame } from "../../util/games";
-import { Box, Container, Flex, Heading, Text, Spacer } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Spacer } from "@chakra-ui/react";
 import GamePageNav from "../../components/games/page-nav";
 import GameBreadcrumb from "../../components/games/breadcrumb";
 import Head from "next/head";
 import ScreenshotGallery from "../../components/games/screenshot-gallery";
+import PageContainer from "../../components/page-container";
 
 const logGameDataOnBrowser = (gameData: Game) => {
   if (typeof window !== "undefined") {
@@ -63,7 +64,7 @@ const GamePage: FC<Props> = ({ gameData, releaseDate, prevId, nextId }) => {
         <title>{gameData.name} - THIS GAME DOES NOT EXIST</title>
       </Head>
 
-      <Container maxW="4xl" px={{ base: "10px", md: "50px" }}>
+      <PageContainer>
         <GameBreadcrumb genre={gameData.genres[0]} name={gameData.name} />
 
         <Heading mb={3}>{gameData.name}</Heading>
@@ -108,7 +109,7 @@ const GamePage: FC<Props> = ({ gameData, releaseDate, prevId, nextId }) => {
         </Box>
 
         <GamePageNav my={5} prevId={prevId} nextId={nextId} />
-      </Container>
+      </PageContainer>
     </div>
   );
 };
