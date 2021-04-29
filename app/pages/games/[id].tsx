@@ -3,20 +3,11 @@ import Image from "next/image";
 import React, { FC } from "react";
 import { Game } from "../../types";
 import { getAllGames, getGame } from "../../util/games";
-import {
-  Box,
-  Container,
-  Flex,
-  Heading,
-  Text,
-  Spacer,
-  HStack,
-} from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Text, Spacer } from "@chakra-ui/react";
 import GamePageNav from "../../components/games/page-nav";
 import GameBreadcrumb from "../../components/games/breadcrumb";
 import Head from "next/head";
 import ScreenshotGallery from "../../components/games/screenshot-gallery";
-import { linkSync } from "node:fs";
 
 const logGameDataOnBrowser = (gameData: Game) => {
   if (typeof window !== "undefined") {
