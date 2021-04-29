@@ -31,7 +31,9 @@ const GameBreadcrumb: FC<Props> = ({ genre, name, ...props }) => (
     </BreadcrumbItem>
 
     <BreadcrumbItem>
-      <BreadcrumbLink href={`/games/${genre}`}>{genre}</BreadcrumbLink>
+      <BreadcrumbLink _hover={{ textDecoration: "none", cursor: "default" }}>
+        {genre}
+      </BreadcrumbLink>
     </BreadcrumbItem>
 
     <BreadcrumbItem isCurrentPage>

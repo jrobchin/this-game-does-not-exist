@@ -14,6 +14,12 @@ import {
 import { Game } from "../../types";
 import Image from "next/image";
 
+const GameLink: FC<{ game: Game }> = ({ game, children, ...props }) => (
+  <Link href={`/games/${game._id}`} {...props}>
+    {children}
+  </Link>
+);
+
 type Props = {
   game: Game;
 } & BoxProps;
@@ -28,16 +34,18 @@ const GameCard: FC<Props> = ({ game, ...props }) => (
         borderRadius="md"
         overflow="hidden"
       >
-        <Image
-          src={`/images/headers/${game.header_img}.jpg`}
-          layout="fill"
-          objectFit="cover"
-        />
+        <GameLink game={game}>
+          <Image
+            src={`/images/headers/${game.header_img}.jpg`}
+            layout="fill"
+            objectFit="cover"
+          />
+        </GameLink>
       </Box>
 
       <VStack alignItems="left" w={{ base: "100%", md: "60%" }} p="20px">
         <Heading fontSize="xl">
-          <Link href={`/games/${game._id}`}>{game.name}</Link>
+          <GameLink game={game}>{game.name}</GameLink>
         </Heading>
         <Text>
           <b>Developer:</b> {game.developer}

@@ -20,7 +20,7 @@ const NavLink: FC<{ to?: string } & LinkProps> = ({
   to = "/",
   ...props
 }) => (
-  <Link href={to} fontWeight={600} marginY={5} paddingX={5} {...props}>
+  <Link href={to} fontWeight={600} paddingX={5} {...props}>
     {children}
   </Link>
 );
@@ -50,18 +50,21 @@ const MobileNav: FC = () => {
 
       <Collapse in={isOpen} animateOpacity>
         <VStack marginBottom={5}>
-          <Link fontWeight={600} color="gray.600">
+          <NavLink to="/games" color="gray.600">
             VIEW ALL GAMES
-          </Link>
+          </NavLink>
           <Box paddingY={2} w="100%">
             <Divider />
           </Box>
-          <Link fontWeight={600} color="red.500">
+          <NavLink
+            to="https://www.youtube.com/channel/UCtt7TyXKcSN7_gchU4lEyRQ"
+            color="red.500"
+          >
             YouTube
-          </Link>
-          <Link fontWeight={600} color="gray.600">
-            Source Code
-          </Link>
+          </NavLink>
+          <NavLink to="https://github.com/jrobchin/tgdne" color="gray.600">
+            Code
+          </NavLink>
         </VStack>
       </Collapse>
     </Box>
@@ -69,7 +72,7 @@ const MobileNav: FC = () => {
 };
 
 const DesktopNav: FC = () => (
-  <Flex display={{ base: "none", md: "flex" }}>
+  <Flex display={{ base: "none", md: "flex" }} my={5}>
     <HStack>
       <NavLink color="gray.600">THIS GAME DOES NOT EXIST</NavLink>
       <NavLink to="/games" color="gray.600">
