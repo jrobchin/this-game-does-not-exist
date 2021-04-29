@@ -1,4 +1,4 @@
-import { Heading, Link, Text, VStack } from "@chakra-ui/react";
+import { Heading, Text, VStack } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import React, { FC } from "react";
 import GameCard from "../../components/games/game-card";
