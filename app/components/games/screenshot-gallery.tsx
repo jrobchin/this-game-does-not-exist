@@ -23,7 +23,7 @@ const ScreenshotGallery: FC<Props> = ({ screenshots, ...props }) => {
 
   return (
     <VStack {...props}>
-      <Box position="relative" h="90%" w="100%">
+      <Box position="relative" minH="300px" minW="300px" h="90%" w="100%">
         <Image
           src={`/images/screenshots/${screenshots[currScreenshot]}.jpg`}
           layout="fill"

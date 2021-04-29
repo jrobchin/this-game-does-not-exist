@@ -1,9 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
-import { FC } from "react";
+import React, { FC } from "react";
 import { Game } from "../../types";
 import { getAllGames, getGame } from "../../util/games";
-import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Text, Spacer } from "@chakra-ui/react";
 import GamePageNav from "../../components/games/page-nav";
 import GameBreadcrumb from "../../components/games/breadcrumb";
 import Head from "next/head";
@@ -21,15 +21,16 @@ const logGameDataOnBrowser = (gameData: Game) => {
 };
 
 const GameImages: FC<{ gameData: Game }> = ({ gameData }) => (
-  <Flex direction={{ base: "column-reverse", md: "row" }} minH="215px">
-    <Box position="relative" w="60%">
+  <Flex direction={{ base: "column", md: "row" }}>
+    <Box position="relative" w={{ base: "100%" }} minH="200px" p={2}>
       <Image
         src={`/images/headers/${gameData.header_img}.jpg`}
         layout="fill"
         objectFit="contain"
       />
     </Box>
-    <ScreenshotGallery screenshots={gameData.screenshot_img} flexGrow={1} />
+    <Spacer minW={10} minH={10} />
+    <ScreenshotGallery screenshots={gameData.screenshot_img} />
   </Flex>
 );
 
@@ -42,7 +43,6 @@ type Props = {
 
 const GamePage: FC<Props> = ({ gameData, releaseDate, prevId, nextId }) => {
   logGameDataOnBrowser(gameData);
-  console.log(releaseDate);
 
   return (
     <div>
@@ -57,9 +57,19 @@ const GamePage: FC<Props> = ({ gameData, releaseDate, prevId, nextId }) => {
 
         <GameImages gameData={gameData} />
 
-        <Box my={5} />
+        <Box p={5} my={5} borderRadius="lg" shadow="lg" maxW="sm">
+          <Text>
+            <b>Release Date:</b> {releaseDate}
+          </Text>
+          <Text>
+            <b>Developer:</b> {gameData.developer}
+          </Text>
+          <Text>
+            <b>Publisher:</b> {gameData.publisher}
+          </Text>
+        </Box>
 
-        <Text>Release Date: {releaseDate}</Text>
+        <Box my={5} />
 
         <p>{JSON.stringify(gameData)}</p>
 
@@ -114,7 +124,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const prevId = gameIds[idIndex - 1] || null;
   const nextId = gameIds[idIndex + 1] || null;
 
-  // Generated data does not contain release data so we generate it here
+  // Generated data does not contain release data so we generate it here.
+  // Should be static per build though.
   const releaseDate = randomDate(new Date(1998, 0, 1), new Date());
   const releaseDateString = `${releaseDate.getDate()} ${
     MONTHS[releaseDate.getMonth()]
