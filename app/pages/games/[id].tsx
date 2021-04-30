@@ -39,9 +39,7 @@ function descriptionLines(description: string): string[] {
   let lines: string[] = [];
 
   // Split and new line on points and dashes
-  let points = description
-    .split(/[\-\*•] /i)
-    .map((val, index) => (index > 0 ? `- ${val}` : val));
+  let points = description.split("\n");
   lines.push(...points);
 
   // letter-punctuation-letter should probably be a new line and point
@@ -103,8 +101,8 @@ const GamePage: FC<Props> = ({ gameData, releaseDate, prevId, nextId }) => {
 
         <Box p={5} borderRadius="lg" shadow="lg">
           <Heading size="md">About</Heading>
-          {descriptionLines(gameData.description).map((line) => (
-            <Text>{line}</Text>
+          {descriptionLines(gameData.description).map((line, index) => (
+            <Text key={index}>{line}</Text>
           ))}
         </Box>
 
