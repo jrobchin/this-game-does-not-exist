@@ -15,10 +15,6 @@ import PageContainer from "../components/page-container";
 const Home: FC = () => {
   return (
     <div>
-      <Head>
-        <title>This Game Does Not Exist</title>
-      </Head>
-
       <PageContainer mt={10}>
         <VStack>
           <SimpleGrid columns={{ base: 1, md: 2 }} columnGap={5} rowGap={10}>
