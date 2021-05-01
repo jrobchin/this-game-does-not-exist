@@ -39,6 +39,7 @@ const GameCard: FC<Props> = ({ game, ...props }) => (
             src={`/images/headers/${game.header_img}.jpg`}
             layout="fill"
             objectFit="cover"
+            priority={true}
           />
         </GameLink>
       </Box>

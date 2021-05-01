@@ -41,6 +41,7 @@ const Home: FC = () => {
                   src="/images/gpt-2.gif"
                   layout="fill"
                   objectFit="contain"
+                  priority={true}
                 />
               </Box>
               <Text fontSize="xs">
@@ -88,6 +89,7 @@ const Home: FC = () => {
                   src="/images/nvidiafacegan.gif"
                   layout="fill"
                   objectFit="contain"
+                  priority={true}
                 />
               </Box>
               <Text fontSize="xs">
@@ -105,6 +107,7 @@ const Home: FC = () => {
                   src="/images/halflifeheader.jpg"
                   layout="fill"
                   objectFit="contain"
+                  priority={true}
                 />
               </Box>
               <Text fontSize="xs">
@@ -121,6 +124,7 @@ const Home: FC = () => {
                   src="/images/headers/760503582b2b410caefc7b622f9a0a19.jpg"
                   layout="fill"
                   objectFit="contain"
+                  priority={true}
                 />
               </Box>
               <Text fontSize="xs">

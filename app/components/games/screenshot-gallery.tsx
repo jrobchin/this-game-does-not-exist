@@ -28,6 +28,7 @@ const ScreenshotGallery: FC<Props> = ({ screenshots, ...props }) => {
           src={`/images/screenshots/${screenshots[currScreenshot]}.jpg`}
           layout="fill"
           objectFit="contain"
+          priority={true}
         />
       </Box>
 

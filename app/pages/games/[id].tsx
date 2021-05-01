@@ -28,6 +28,7 @@ const GameImages: FC<{ gameData: Game }> = ({ gameData }) => (
         src={`/images/headers/${gameData.header_img}.jpg`}
         layout="fill"
         objectFit="contain"
+        priority={true}
       />
     </Box>
     <Spacer minW={10} minH={10} />
