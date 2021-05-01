@@ -2,6 +2,8 @@
 
 Checkout the live site here [thisgamedoesnotexist.jsonchin.com](https://thisgamedoesnotexist.jsonchin.com).
 
+Watch my YouTube video on this project (coming soon) [https://www.youtube.com/channel/UCtt7TyXKcSN7_gchU4lEyRQ](https://www.youtube.com/channel/UCtt7TyXKcSN7_gchU4lEyRQ).
+
 # About
 
 THIS GAME DOES NOT EXIST is an experiment in generative artificial intelligence. This site contains 130 video game pages that were generated using an implementation of OpenAI's Generative Pre-trained Transformer 2 (GPT-2) to generate text and a simple implementation of generative adversarial networks (GAN) to generate header images and "screenshots".
