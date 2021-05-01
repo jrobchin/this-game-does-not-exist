@@ -6,7 +6,6 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import Head from "next/head";
 import Image from "next/image";
 import React, { FC } from "react";
 import HyperLink from "../components/hyperlink";
