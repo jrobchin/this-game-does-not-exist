@@ -1,5 +1,6 @@
 import {
   Box,
+  Code,
   Heading,
   SimpleGrid,
   Spacer,
@@ -69,14 +70,16 @@ const Home: FC = () => {
               Here is what one training sample looks like:
               <Spacer my={2} />
               <Text fontSize="sm" fontStyle="italic">
-                {
-                  "<|game|><|name|>Half-Life<|developer|>Valve <|publisher|>Valve<|description|>Named Game of the Year by over 50 publications, Valve's debut title blends action and adventure with award-winning technology to create a frighteningly realistic world where players must think to survive. Also includes an exciting multiplayer mode that allows you to play against friends and enemies around the world.<|endoftext|>"
-                }
+                <Code>
+                  {
+                    "<|game|><|name|>Half-Life<|developer|>Valve <|publisher|>Valve<|description|>Named Game of the Year by over 50 publications, Valve's debut title blends action and adventure with award-winning technology to create a frighteningly realistic world where players must think to survive. Also includes an exciting multiplayer mode that allows you to play against friends and enemies around the world.<|endoftext|>"
+                  }
+                </Code>
               </Text>
               <Spacer my={2} />
-              The model uses the tokens (e.g. {"<|game|>"} and{" "}
-              {"<|description|>"}) to prompt each class of data while keeping
-              context during the entire generation.
+              The model uses the tokens (e.g. <Code>{"<|game|>"}</Code> and{" "}
+              <Code>{"<|description|>"}</Code>) to prompt each class of data
+              while keeping context during the entire generation.
             </Box>
 
             {/* GENERATING TEXT */}
