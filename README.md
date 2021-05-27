@@ -2,7 +2,7 @@
 
 Checkout the live site here [thisgamedoesnotexist.jsonchin.com](https://thisgamedoesnotexist.jsonchin.com).
 
-Watch my YouTube video on this project (coming soon) [https://www.youtube.com/channel/UCtt7TyXKcSN7_gchU4lEyRQ](https://www.youtube.com/channel/UCtt7TyXKcSN7_gchU4lEyRQ).
+[Demo video on YouTube](https://www.youtube.com/watch?v=_mTWMLhpJoA)
 
 # About
 
